@@ -1,32 +1,33 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 
 export default function SignUpPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState<string | null>(null)
-  const [loading, setLoading] = useState(false)
-  const router = useRouter()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   async function handleSignUp(e: React.FormEvent) {
-    e.preventDefault()
-    setLoading(true)
-    setError(null)
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
 
-    const supabase = createClient()
-    const { error } = await supabase.auth.signUp({ email, password })
+    const supabase = createClient();
+    const { error } = await supabase.auth.signUp({ email, password });
 
-    setLoading(false)
+    setLoading(false);
 
     if (error) {
-      setError(error.message)
-      return
+      setError(error.message);
+      return;
     }
 
-    router.push('/login')
+    router.push("/dashboard");
+    router.refresh();
   }
 
   return (
@@ -60,9 +61,9 @@ export default function SignUpPage() {
           disabled={loading}
           className="w-full rounded bg-black px-3 py-2 text-white disabled:opacity-50"
         >
-          {loading ? 'Creating account…' : 'Sign up'}
+          {loading ? "Creating account…" : "Sign up"}
         </button>
       </form>
     </main>
-  )
+  );
 }
