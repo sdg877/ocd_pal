@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
-import AddItemForm from '../dashboard/AddItemForm'
+import AddItemForm from './AddItemForm'
+import CheckHistory from './CheckHistory'
 
 export default async function ProfilePage() {
   const supabase = await createClient()
@@ -17,7 +18,7 @@ export default async function ProfilePage() {
       <AddItemForm />
 
       <h2 className="text-lg font-medium mt-8 mb-4">History</h2>
-      <p className="text-gray-600 text-sm">Check history will go here.</p>
+      <CheckHistory />
     </main>
   )
 }
