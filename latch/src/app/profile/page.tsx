@@ -1,14 +1,16 @@
-import { createClient } from '@/lib/supabase/server'
-import { redirect } from 'next/navigation'
-import AddItemForm from './AddItemForm'
-import CheckHistory from './CheckHistory'
+import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
+import AddItemForm from "./AddItemForm";
+import CheckHistory from "./CheckHistory";
 
 export default async function ProfilePage() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect('/login')
+    redirect("/login");
   }
 
   return (
@@ -20,5 +22,5 @@ export default async function ProfilePage() {
       <h2 className="text-lg font-medium mt-8 mb-4">History</h2>
       <CheckHistory />
     </main>
-  )
+  );
 }
